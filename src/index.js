@@ -11,6 +11,8 @@ import resolvers from './apollo/resolvers'
 import { ThemeProvider } from 'styled-components'
 import { theme } from './components/shared/styled-semantic'
 
+import { BrowserRouter as Router } from "react-router-dom"
+
 import { AUTH_TOKEN } from './constants'
 
 import App from './App'
@@ -37,14 +39,16 @@ const client = new ApolloClient({
 const token = localStorage.getItem(AUTH_TOKEN)
 
 ReactDOM.render(
-	<ThemeProvider theme={theme}>
-		<ApolloProvider client={client}>
-			<App
-				token={token}
-				client={client}
-			/>
-		</ApolloProvider>
-	</ThemeProvider>
+  <Router>
+    <ThemeProvider theme={theme}>
+      <ApolloProvider client={client}>
+        <App
+          token={token}
+          client={client}
+        />
+      </ApolloProvider>
+    </ThemeProvider>
+  </Router>
 , document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change
